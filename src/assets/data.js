@@ -243,34 +243,35 @@ const chainDataFetch = {
         for (let i in cryptos) {
             if (cryptos[i].airdrop) {
                 let airdropBalance = 0
-                cryptos[i].airdropWallet.forEach(async (wallet) => {
+                cryptos[i].airdropWallet.forEach(async (wallet,wdx) => {
                     let data = await api.getWallet(cryptos[i].rpc, wallet)
                     airdropBalance += (data.result[0].amount / 1000000000)
-                })
-                console.log('airdropBalance',airdropBalance)
-                storage.getItem(`${i}airdrop`, (err, value) => {
-                    if (err) {
-                        storage.setItem(`${i}airdrop`, [
-                            {
-                                date: format(date, "MM-dd:kk-mm"),
-                                symbol: i,
-                                value: airdropBalance,
-                            },
-                        ]);
-                    } else {
-                        let historyData = value ? value : [];
-
-                        if (historyData.length > 3000000) {
-                            historyData = historyData.slice(10, historyData.length);
-                        }
-                        historyData.push({
-                            date: format(date, "MM-dd:kk-mm"),
-                            symbol: i,
-                            value: airdropBalance,
+                    if(wdx === cryptos[i].airdropWallet.length - 1){
+                        storage.getItem(`${i}airdrop`, (err, value) => {
+                            if (err) {
+                                storage.setItem(`${i}airdrop`, [
+                                    {
+                                        date: format(date, "MM-dd:kk-mm"),
+                                        symbol: i,
+                                        value: airdropBalance,
+                                    },
+                                ]);
+                            } else {
+                                let historyData = value ? value : [];
+        
+                                if (historyData.length > 3000000) {
+                                    historyData = historyData.slice(10, historyData.length);
+                                }
+                                historyData.push({
+                                    date: format(date, "MM-dd:kk-mm"),
+                                    symbol: i,
+                                    value: airdropBalance,
+                                });
+                                storage.setItem(`${i}airdrop`, historyData);
+                            }
                         });
-                        storage.setItem(`${i}airdrop`, historyData);
                     }
-                });
+                })
             }
         }
     }
