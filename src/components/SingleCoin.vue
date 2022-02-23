@@ -30,6 +30,20 @@ export default {
         crypto: String,
     },
     watch: {
+        time: {
+            handler(newValue, oldValue) {
+                if (newValue !== oldValue) {
+                    if (this.onChainChart) {
+                        this.onChainChart.destroy()
+                        this.priceChart.destroy()
+                    }
+                    setTimeout(() => {
+                        this.getPrice(newValue);
+                        this.getOnChainData(newValue);
+                    }, 0)
+                }
+            },
+        },
         crypto(newValue, oldValue) {
             if (newValue !== oldValue) {
                 if (this.onChainChart) {

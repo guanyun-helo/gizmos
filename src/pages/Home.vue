@@ -21,10 +21,13 @@
         :expand-icon="expandIcon"
         @update:value="handleUpdateValue"
       />
+      <n-gradient-text type="info">{{ format(this.date, 'MM-dd:kk-mm-ss') }}</n-gradient-text>
+      <n-gradient-text type="danger">Data refresh {{ time }} times</n-gradient-text>
     </n-layout-sider>
     <n-layout>
-      <SingleCoin :crypto="crypto" v-if="cryptoPair.length === 1"></SingleCoin>
+      <SingleCoin :time="time" :crypto="crypto" v-if="cryptoPair.length === 1"></SingleCoin>
       <Compare
+        :time="time"
         :priceBetween="priceBetween"
         :crypto="crypto"
         :cryptoPair="cryptoPair"
@@ -41,6 +44,7 @@ import { BookmarkOutline, CaretDownOutline } from "@vicons/ionicons5";
 import SingleCoin from "../components/SingleCoin.vue";
 import Compare from "../components/Compare.vue";
 import chainDataFetch from "../assets/data";
+import { format } from "date-fns";
 const menuOptions = [
   {
     label: "ATOM",
@@ -92,10 +96,19 @@ export default {
       crypto: "ATOM",
       duration: 60000,
       cryptoPair: ['ATOM'],
-      priceBetween: 1
+      priceBetween: 1,
+      time: 0,
+      date: new Date()
     };
   },
   methods: {
+    timepass() {
+      setTimeout(() => {
+        this.date = new Date()
+        this.timepass()
+      }, 1000)
+    },
+    format: format,
     handleUpdateValue(key, value) {
       this.crypto = key;
       this.cryptoPair = value.coins.slice()
@@ -103,6 +116,7 @@ export default {
     },
   },
   mounted() {
+    this.timepass()
     chainDataFetch.fetchPriceData();
     chainDataFetch.fetchIBCsupply();
     chainDataFetch.fetchSupply();
@@ -116,6 +130,7 @@ export default {
       chainDataFetch.fetchLiquidity();
       chainDataFetch.fetchStakeToken();
       chainDataFetch.getAirdrop();
+      this.time++
     }, this.duration);
   },
   setup() {

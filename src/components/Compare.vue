@@ -26,6 +26,21 @@ export default {
         priceBetween: Number
     },
     watch: {
+        time: {
+            handler(newValue, oldValue) {
+                if (newValue !== oldValue) {
+                    if (this.priceChart) {
+                        this.priceChart.destroy()
+                    }
+                    setTimeout(() => {
+                        (async () => {
+                            let compareData = await chainDataFetch.getComparePriceData()
+                            this.renderPriceData(compareData.data)
+                        })()
+                    }, 0)
+                }
+            },
+        },
         cryptoPair: {
             handler(newValue, oldValue) {
                 if (newValue !== oldValue) {
