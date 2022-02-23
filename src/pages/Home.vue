@@ -118,6 +118,20 @@ export default {
       this.cryptoPair = value.coins.slice()
       this.priceBetween = value.between
     },
+
+    fetchData() {
+      setTimeout(() => {
+        chainDataFetch.fetchPriceData();
+        chainDataFetch.fetchIBCsupply();
+        chainDataFetch.fetchSupply();
+        chainDataFetch.fetchLiquidity();
+        chainDataFetch.fetchStakeToken();
+        chainDataFetch.getAirdrop();
+        this.time++
+        this.LikeButton = `https://button.like.co/in/embed/editorlikersocial/button?referrer=${this.date}&type=gizmos`
+        this.fetchData()
+      }, this.duration);
+    }
   },
   mounted() {
     document.title = 'Gizmos'
@@ -128,17 +142,7 @@ export default {
     chainDataFetch.fetchLiquidity();
     chainDataFetch.fetchStakeToken();
     chainDataFetch.getAirdrop();
-    setTimeout(() => {
-      chainDataFetch.fetchPriceData();
-      chainDataFetch.fetchIBCsupply();
-      chainDataFetch.fetchSupply();
-      chainDataFetch.fetchLiquidity();
-      chainDataFetch.fetchStakeToken();
-      chainDataFetch.getAirdrop();
-      this.time++
-      this.LikeButton = `https://button.like.co/in/embed/editorlikersocial/button?referrer=${this.date}&type=gizmos`
-
-    }, this.duration);
+    this.fetchData()
   },
   setup() {
     return {
