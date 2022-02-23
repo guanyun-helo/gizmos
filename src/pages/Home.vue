@@ -33,6 +33,9 @@
         :cryptoPair="cryptoPair"
         v-if="cryptoPair.length > 1"
       ></Compare>
+      <n-card title="Click LIKE!" size="huge" style="padding: 0">
+        <iframe :src="LikeButton"></iframe>
+      </n-card>
     </n-layout>
   </n-layout>
 </template>
@@ -98,7 +101,8 @@ export default {
       cryptoPair: ['ATOM'],
       priceBetween: 1,
       time: 0,
-      date: new Date()
+      date: new Date(),
+      LikeButton: `https://button.like.co/in/embed/editorlikersocial/button?referrer=${this.date}&type=gizmos`
     };
   },
   methods: {
@@ -116,6 +120,7 @@ export default {
     },
   },
   mounted() {
+    document.title = 'Gizmos'
     this.timepass()
     chainDataFetch.fetchPriceData();
     chainDataFetch.fetchIBCsupply();
@@ -131,6 +136,8 @@ export default {
       chainDataFetch.fetchStakeToken();
       chainDataFetch.getAirdrop();
       this.time++
+      this.LikeButton = `https://button.like.co/in/embed/editorlikersocial/button?referrer=${this.date}&type=gizmos`
+
     }, this.duration);
   },
   setup() {

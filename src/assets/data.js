@@ -234,7 +234,7 @@ const chainDataFetch = {
         let price = await storage.getItem(`${symbol}`)
         return { price }
     },
-    getComparePriceData: async ()=>{
+    getComparePriceData: async () => {
         let data = await storage.getItem(`comparePrice`)
         return { data }
     },
@@ -243,10 +243,16 @@ const chainDataFetch = {
         for (let i in cryptos) {
             if (cryptos[i].airdrop) {
                 let airdropBalance = 0
-                cryptos[i].airdropWallet.forEach(async (wallet,wdx) => {
-                    let data = await api.getWallet(cryptos[i].rpc, wallet)
-                    airdropBalance += (data.result[0].amount / 1000000000)
-                    if(wdx === cryptos[i].airdropWallet.length - 1){
+                try {
+                    await Promise.all(cryptos[i].airdropWallet.map(async (wallet) => {
+                        let data = await api.getWallet(cryptos[i].rpc, wallet)
+                        airdropBalance += (data.result[0].amount / 1000000000)
+                    }));
+                } catch (err) {
+                    throw new Error(`Something failed`);
+                } finally {
+                    if (airdropBalance !== 0) {
+                        console.log(airdropBalance)
                         storage.getItem(`${i}airdrop`, (err, value) => {
                             if (err) {
                                 storage.setItem(`${i}airdrop`, [
@@ -258,7 +264,7 @@ const chainDataFetch = {
                                 ]);
                             } else {
                                 let historyData = value ? value : [];
-        
+
                                 if (historyData.length > 3000000) {
                                     historyData = historyData.slice(10, historyData.length);
                                 }
@@ -271,7 +277,7 @@ const chainDataFetch = {
                             }
                         });
                     }
-                })
+                }
             }
         }
     }

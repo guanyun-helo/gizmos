@@ -45,7 +45,7 @@ const api = {
     },
     getWallet(rpc,wallet){
         return fetch(`${rpc}/bank/balances/${wallet}`).then((res)=>{
-            return res.json()
+            return res.json().finally()
         })
     }
 };
