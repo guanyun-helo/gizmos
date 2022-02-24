@@ -98,7 +98,7 @@ export default {
   data() {
     return {
       crypto: "ATOM",
-      duration: 30000,
+      duration: 60000,
       cryptoPair: ['ATOM'],
       priceBetween: 1,
       time: 0,
