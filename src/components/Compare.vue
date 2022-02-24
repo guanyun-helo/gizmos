@@ -4,7 +4,7 @@
         <div class="onChainChart">
             <n-card title="On Chain Data" size="huge">
                 <div class="title"></div>
-                <div id="v1"></div>
+                <div id="s1"></div>
             </n-card>
         </div>
     </div>
@@ -72,7 +72,7 @@ export default {
                 item.revelance = (item[this.coins[1]] * this.priceBetween) / item[this.coins[0]]
             })
             const chart = new Chart({
-                container: 'v1',
+                container: 's1',
                 autoFit: true,
                 height: 500,
             });
