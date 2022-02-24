@@ -4,7 +4,7 @@
         <div class="onChainChart">
             <n-card title="On Chain Data" size="huge">
                 <div class="title"></div>
-                <div id="s1"></div>
+                <div :id="priceChartID"></div>
             </n-card>
         </div>
     </div>
@@ -13,11 +13,13 @@
 <script>
 import chainDataFetch from "../assets/data";
 import { Chart } from '@antv/g2';
+import util from '../assets/util'
 
 export default {
     data() {
         return {
-            priceChart: null
+            priceChart: null,
+            priceChartID: 's' + util.makeid(5)
         };
     },
     props: {
@@ -78,7 +80,7 @@ export default {
                 item.revelance = (item[this.coins[1]] * this.priceBetween) / item[this.coins[0]]
             })
             const chart = new Chart({
-                container: 's1',
+                container: this.priceChartID,
                 autoFit: true,
                 height: 500,
             });
