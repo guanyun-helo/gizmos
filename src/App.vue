@@ -11,6 +11,7 @@ import { darkTheme, lightTheme } from 'naive-ui'
 
 export default {
   setup() {
+    document.title = 'Gizmos'
     return {
       darkTheme,
       lightTheme
