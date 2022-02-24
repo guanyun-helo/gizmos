@@ -3,13 +3,13 @@
         <div class="onChainChart">
             <n-card title="On Chain Data" size="huge">
                 <div class="title"></div>
-                <div id="v1"></div>
+                <div :id="onChainChartID"></div>
             </n-card>
         </div>
         <div class="priceChart">
             <n-card title="Price Data" size="huge">
                 <div class="title"></div>
-                <div id="v2"></div>
+                <div :id="priceChartID"></div>
             </n-card>
         </div>
     </div>
@@ -18,10 +18,12 @@
 <script>
 import chainDataFetch from "../assets/data";
 import { Chart } from '@antv/g2';
-
+import util from '../assets/util'
 export default {
     data() {
         return {
+            priceChartID: 'z' + util.makeid(5),
+            onChainChartID: 'z' + util.makeid(5),
             onChainChart: null,
             priceChart: null
         };
@@ -86,7 +88,7 @@ export default {
                 });
             }
             const chart = new Chart({
-                container: 'v1',
+                container: this.onChainChartID,
                 autoFit: true,
                 height: 500,
             });
@@ -113,7 +115,7 @@ export default {
                 });
             }
             const chart = new Chart({
-                container: 'v2',
+                container: this.priceChartID,
                 autoFit: true,
                 height: 500,
             });
