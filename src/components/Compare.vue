@@ -61,6 +61,7 @@ export default {
     },
     mounted() {
         (async () => {
+            if (this.priceChart) return
             let compareData = await chainDataFetch.getComparePriceData()
             this.renderPriceData(compareData.data)
         })()
