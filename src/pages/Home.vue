@@ -22,9 +22,31 @@
         :expand-icon="expandIcon"
         @update:value="handleUpdateValue"
       />
-      <n-gradient-text type="info">{{ format(this.date, 'MM-dd:kk-mm-ss') }}</n-gradient-text>
+      <n-gradient-text type="info">
+        {{
+          format(this.date, "MM-dd:kk-mm-ss")
+        }}
+      </n-gradient-text>
       <n-gradient-text type="danger">Data refresh {{ time }} times</n-gradient-text>
+
+      <n-avatar style="position: absolute; bottom: 50px; left: 42%">
+        <n-icon>
+          <a
+            target="_blank"
+            href="https://github.com/LikeCoinDAO/gizmos/blob/main/src/assets/crypto.js"
+          >
+            <LogoGithub />
+          </a>
+        </n-icon>
+      </n-avatar>
+      <n-log
+        font-size="11"
+        style="position: absolute; bottom: 80px; left: 4%;font-size: 10px;"
+        :rows="8"
+        :log="`点击进入 github 增加你想追踪的空投，注意配置 RPC/IBC/和airdropWallet，然后提交 pr 就能追踪你的空投了`"
+      />
     </n-layout-sider>
+
     <n-layout>
       <SingleCoin :time="time" :crypto="crypto" v-if="coins.length === 1"></SingleCoin>
       <Compare
@@ -49,22 +71,23 @@ import SingleCoin from "../components/SingleCoin.vue";
 import Compare from "../components/Compare.vue";
 import chainDataFetch from "../assets/data";
 import { format } from "date-fns";
+import { LogoGithub } from "@vicons/ionicons5";
 
 const menuOptions = [
   {
     label: "ATOM",
     key: "ATOM",
-    coins: ['ATOM'],
+    coins: ["ATOM"],
   },
   {
     label: "OSMO",
     key: "OSMO",
-    coins: ['OSMO'],
+    coins: ["OSMO"],
   },
   {
     label: "LIKE",
     key: "LIKE",
-    coins: ['LIKE'],
+    coins: ["LIKE"],
   },
   {
     label: "ATOMLIKE",
@@ -77,14 +100,12 @@ const menuOptions = [
     key: "ATOMOSMO",
     coins: ["ATOM", "OSMO"],
     priceBetween: 1,
-
   },
   {
     label: "OSMOLIKE",
     key: "OSMOLIKE",
     coins: ["OSMO", "LIKE"],
     priceBetween: 10000,
-
   },
 ];
 export default {
@@ -95,6 +116,7 @@ export default {
   components: {
     SingleCoin,
     Compare,
+    LogoGithub,
   },
   data() {
     return {
@@ -104,22 +126,22 @@ export default {
       priceBetween: this.routeParams().priceBetween,
       time: 0,
       date: new Date(),
-      LikeButton: `https://button.like.co/in/embed/editorlikersocial/button?referrer=${this.date}&type=gizmos`
+      LikeButton: `https://button.like.co/in/embed/editorlikersocial/button?referrer=${this.date}&type=gizmos`,
     };
   },
   methods: {
     timepass() {
       setTimeout(() => {
-        this.date = new Date()
-        this.timepass()
-      }, 1000)
+        this.date = new Date();
+        this.timepass();
+      }, 1000);
     },
     format: format,
     handleUpdateValue(key, value) {
       this.crypto = key;
-      this.coins = value.coins.slice()
-      this.priceBetween = value.priceBetween
-      this.$router.push(key)
+      this.coins = value.coins.slice();
+      this.priceBetween = value.priceBetween;
+      this.$router.push(key);
     },
 
     fetchData() {
@@ -130,36 +152,37 @@ export default {
         chainDataFetch.fetchLiquidity();
         chainDataFetch.fetchStakeToken();
         chainDataFetch.getAirdrop();
-        this.time++
-        this.LikeButton = `https://button.like.co/in/embed/editorlikersocial/button?referrer=${this.date}&type=gizmos`
-        this.fetchData()
-        this.message.info('Data has been feched!!')
-
+        this.time++;
+        this.LikeButton = `https://button.like.co/in/embed/editorlikersocial/button?referrer=${this.date}&type=gizmos`;
+        this.fetchData();
+        this.message.info("Data has been feched!!");
       }, this.duration);
-    }
+    },
   },
   mounted() {
-    this.timepass()
+    this.timepass();
     chainDataFetch.fetchPriceData();
     chainDataFetch.fetchIBCsupply();
     chainDataFetch.fetchSupply();
     chainDataFetch.fetchLiquidity();
     chainDataFetch.fetchStakeToken();
     chainDataFetch.getAirdrop();
-    this.fetchData()
+    this.fetchData();
   },
   setup() {
-    const message = useMessage()
+    const message = useMessage();
     return {
       message: message,
       collapsed: ref(false),
       menuOptions,
       routeParams() {
         if (this.$route.params.coin === "") {
-          return menuOptions[0]
+          return menuOptions[0];
         } else {
-          let coin = menuOptions.find(item => item.key === this.$route.params.coin)
-          return coin
+          let coin = menuOptions.find(
+            (item) => item.key === this.$route.params.coin
+          );
+          return coin;
         }
       },
       renderMenuLabel(option) {
