@@ -66,6 +66,11 @@ export default {
             this.renderPriceData(compareData.data)
         })()
     },
+    destroy() {
+        if (this.priceChart) {
+            this.priceChart.destroy()
+        }
+    },
     methods: {
         renderPriceData(data) {
             // console.log(data1)

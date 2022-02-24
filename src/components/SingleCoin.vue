@@ -62,6 +62,12 @@ export default {
         this.getPrice(this.crypto);
         this.getOnChainData(this.crypto);
     },
+    destroy() {
+        if (this.priceChart) {
+            this.onChainChart.destroy()
+            this.priceChart.destroy()
+        }
+    },
     methods: {
         async getOnChainData(symbol) {
             let onChainData = await chainDataFetch.getOnChainData(symbol);
