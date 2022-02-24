@@ -100,6 +100,16 @@ export default {
                     isArea: false,
                 },
             });
+            chart.legend('series', {
+                selected: {
+                    airdrop: true,
+                    IBCsupply: true,
+                    supply: false,
+                    liquidity: false,
+                    bonded: false,
+                    notBonded: false,
+                },
+            });
             chart.line().position('date*value').color('series');
             chart.area().position('date*value').color('series');
             chart.render();
