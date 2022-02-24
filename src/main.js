@@ -7,7 +7,9 @@ import 'vfonts/FiraCode.css'
 import Home from "./pages/Home.vue";
 
 const routes = [
-  { path: '/:coin?', component: Home,title: 'Gizmos',},
+  { path: '/:coin?', component: Home, meta:{
+    title: 'Gizmos'
+  }},
 ]
 
 const router = createRouter({
