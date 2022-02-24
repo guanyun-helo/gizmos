@@ -53,6 +53,6 @@ body {
   }
 }
 .chart {
-  min-width: 390px;
+  min-width: 320px;
 }
 </style>
