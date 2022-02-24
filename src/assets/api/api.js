@@ -1,8 +1,16 @@
 import storage from "localforage";
 // import cryptos from "../crypto";
 const api = {
-    getPrice: (Symbol) => {
-        return fetch(`https://api-osmosis.imperator.co/tokens/v1/${Symbol}`).then(
+    getOffCosmosPrice: (symbol)=>{
+        return fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${symbol}&vs_currencies=usd`).then(
+            (res) => {
+                return res.json()
+            }
+        );
+    },
+    getPrice: (Symbol,type) => {
+        let baseUrl = type === 'cosmos' ? `https://api-osmosis.imperator.co/tokens/v1/${Symbol}` :`https://api.coingecko.com/api/v3/simple/price?ids=${Symbol}&vs_currencies=usd`
+        return fetch(baseUrl).then(
             (res) => {
                 return res.json()
             }

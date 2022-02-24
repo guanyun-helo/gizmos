@@ -80,6 +80,16 @@ const menuOptions = [
     coins: ["ATOM"],
   },
   {
+    label: "UST",
+    key: "UST",
+    coins: ["UST"],
+  },
+  {
+    label: "LUNA",
+    key: "LUNA",
+    coins: ["LUNA"],
+  },
+  {
     label: "OSMO",
     key: "OSMO",
     coins: ["OSMO"],
@@ -88,6 +98,24 @@ const menuOptions = [
     label: "LIKE",
     key: "LIKE",
     coins: ["LIKE"],
+  },
+  {
+    label: "ATOMLUNA",
+    key: "ATOMLUNA",
+    coins: ["ATOM", "LUNA"],
+    priceBetween: 1,
+  },
+  {
+    label: "ATOMbitcoin",
+    key: "ATOMbitcoin",
+    coins: ["ATOM", "bitcoin"],
+    priceBetween: 1,
+  },
+  {
+    label: "ATOMethereum",
+    key: "ATOMethereum",
+    coins: ["ATOM", "ethereum"],
+    priceBetween: 1,
   },
   {
     label: "ATOMLIKE",

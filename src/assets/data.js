@@ -8,7 +8,14 @@ const chainDataFetch = {
         let date = new Date();
         let cryptosCompare = {}
         for (let i in cryptos) {
-            let data = await api.getPrice(i, date);
+            let data = await api.getPrice(i, cryptos[i].type);
+            if(cryptos[i].type !== 'cosmos') {
+                // eslint-disable-next-line no-debugger
+                let temData = Number(data[i].usd)
+                data = [{
+                    price: temData
+                }]
+            }
             cryptosCompare[i] = Number(data[0].price)
             await storage.getItem(i, (err, value) => {
                 if (err) {
@@ -59,6 +66,8 @@ const chainDataFetch = {
     fetchIBCsupply: async () => {
         let date = new Date();
         for (let i in cryptos) {
+            if(cryptos[i].type !== 'cosmos') return
+
             let storageKey = await storage.getItem(cryptos[i].IBC);
 
             let data = await api.getIBCSupply(
@@ -94,6 +103,8 @@ const chainDataFetch = {
     fetchSupply: async () => {
         let date = new Date();
         for (let i in cryptos) {
+            if(cryptos[i].type !== 'cosmos') return
+
             let data = await api.getNativeChainSupply(
                 cryptos[i].rpc,
                 cryptos[i].denom
@@ -128,6 +139,7 @@ const chainDataFetch = {
         // eslint-disable-next-line no-unused-vars
         let date = new Date();
         for (let i in cryptos) {
+            if(cryptos[i].type !== 'cosmos') return
             let data = await api.getOsmosisLiquidity(cryptos[i].pool);
             let asset = data.pool.poolAssets.find(
                 (item) => item.token.denom === cryptos[i].IBC
@@ -161,6 +173,8 @@ const chainDataFetch = {
     fetchStakeToken: async () => {
         let date = new Date();
         for (let i in cryptos) {
+            if(cryptos[i].type !== 'cosmos') return
+
             let data = await api.getStakedToken(cryptos[i].rpc);
             let bonded = Number(data.result.bonded_tokens) / cryptos[i].unit;
             let notBonded = Number(data.result.not_bonded_tokens) / cryptos[i].unit;
@@ -241,6 +255,8 @@ const chainDataFetch = {
     getAirdrop: async () => {
         let date = new Date()
         for (let i in cryptos) {
+            if(cryptos[i].type !== 'cosmos') return
+
             if (cryptos[i].airdrop) {
                 let airdropBalance = 0
                 try {
