@@ -28,6 +28,7 @@ export default {
     },
     props: {
         crypto: String,
+        time: Number,
     },
     watch: {
         time: {
@@ -38,8 +39,8 @@ export default {
                         this.priceChart.destroy()
                     }
                     setTimeout(() => {
-                        this.getPrice(newValue);
-                        this.getOnChainData(newValue);
+                        this.getPrice(this.crypto);
+                        this.getOnChainData(this.crypto);
                     }, 0)
                 }
             },
@@ -85,7 +86,7 @@ export default {
             });
             chart.data(chartData);
             chart.option('slider', {
-                start: 0.9,
+                start: 0,
                 end: 1,
                 trendCfg: {
                     isArea: false,
@@ -112,7 +113,7 @@ export default {
             });
             chart.data(chartData);
             chart.option('slider', {
-                start: 0.9,
+                start: 0,
                 end: 1,
                 trendCfg: {
                     isArea: false,

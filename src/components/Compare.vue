@@ -23,7 +23,8 @@ export default {
     props: {
         crypto: String,
         cryptoPair: Array,
-        priceBetween: Number
+        priceBetween: Number,
+        time: Number,
     },
     watch: {
         time: {

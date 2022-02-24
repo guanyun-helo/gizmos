@@ -1,6 +1,8 @@
 <template>
   <n-config-provider :theme="lightTheme" :theme-overrides="{ common: { fontWeightStrong: '600' } }">
-    <Home msg="Welcome to Your Vue.js App" />
+    <n-message-provider>
+      <Home msg="Welcome to Your Vue.js App" />
+    </n-message-provider>
   </n-config-provider>
 </template>
 

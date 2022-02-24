@@ -42,12 +42,13 @@
 
 <script>
 import { h, ref } from "vue";
-import { NIcon } from "naive-ui";
+import { NIcon, useMessage } from "naive-ui";
 import { BookmarkOutline, CaretDownOutline } from "@vicons/ionicons5";
 import SingleCoin from "../components/SingleCoin.vue";
 import Compare from "../components/Compare.vue";
 import chainDataFetch from "../assets/data";
 import { format } from "date-fns";
+
 const menuOptions = [
   {
     label: "ATOM",
@@ -97,7 +98,7 @@ export default {
   data() {
     return {
       crypto: "ATOM",
-      duration: 60000,
+      duration: 30000,
       cryptoPair: ['ATOM'],
       priceBetween: 1,
       time: 0,
@@ -130,6 +131,8 @@ export default {
         this.time++
         this.LikeButton = `https://button.like.co/in/embed/editorlikersocial/button?referrer=${this.date}&type=gizmos`
         this.fetchData()
+        this.message.info('Data has been feched!!')
+
       }, this.duration);
     }
   },
@@ -145,7 +148,9 @@ export default {
     this.fetchData()
   },
   setup() {
+    const message = useMessage()
     return {
+      message: message,
       collapsed: ref(false),
       menuOptions,
       renderMenuLabel(option) {
