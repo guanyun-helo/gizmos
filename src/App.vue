@@ -1,13 +1,12 @@
 <template>
   <n-config-provider :theme="lightTheme" :theme-overrides="{ common: { fontWeightStrong: '600' } }">
     <n-message-provider>
-      <Home msg="Welcome to Your Vue.js App" />
+      <router-view></router-view>
     </n-message-provider>
   </n-config-provider>
 </template>
 
 <script>
-import Home from './pages/Home.vue'
 import { darkTheme, lightTheme } from 'naive-ui'
 
 export default {
@@ -19,7 +18,6 @@ export default {
   },
   name: "App",
   components: {
-    Home
   },
 };
 </script>

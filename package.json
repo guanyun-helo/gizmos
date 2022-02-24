@@ -12,7 +12,8 @@
     "core-js": "^3.6.5",
     "date-fns": "^2.28.0",
     "localforage": "^1.10.0",
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
     "@vicons/ionicons5": "^0.12.0",

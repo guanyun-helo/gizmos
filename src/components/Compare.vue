@@ -22,7 +22,7 @@ export default {
     },
     props: {
         crypto: String,
-        cryptoPair: Array,
+        coins: Array,
         priceBetween: Number,
         time: Number,
     },
@@ -42,7 +42,7 @@ export default {
                 }
             },
         },
-        cryptoPair: {
+        coins: {
             handler(newValue, oldValue) {
                 if (newValue !== oldValue) {
                     if (this.priceChart) {
@@ -69,7 +69,7 @@ export default {
         renderPriceData(data) {
             // console.log(data1)
             data.forEach(item => {
-                item.revelance = (item[this.cryptoPair[1]] * this.priceBetween) / item[this.cryptoPair[0]]
+                item.revelance = (item[this.coins[1]] * this.priceBetween) / item[this.coins[0]]
             })
             const chart = new Chart({
                 container: 'v1',
@@ -102,10 +102,10 @@ export default {
                     fillOpacity: 0.5,
                 });
 
-            chart.line().position(`date*${this.cryptoPair[0]}`).color('#4eb673');
-            chart.area().position(`date*${this.cryptoPair[0]}`).color('#4eb673');
-            chart.line().position(`date*${this.cryptoPair[1]}`).color('#e1ab4b');
-            chart.area().position(`date*${this.cryptoPair[1]}`).color('#e1ab4b');
+            chart.line().position(`date*${this.coins[0]}`).color('#4eb673');
+            chart.area().position(`date*${this.coins[0]}`).color('#4eb673');
+            chart.line().position(`date*${this.coins[1]}`).color('#e1ab4b');
+            chart.area().position(`date*${this.coins[1]}`).color('#e1ab4b');
             chart.render();
             this.priceChart = chart
         },

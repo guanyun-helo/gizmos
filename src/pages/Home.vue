@@ -12,6 +12,7 @@
       @expand="collapsed = false"
     >
       <n-menu
+        :default-value="this.crypto"
         :collapsed="collapsed"
         :collapsed-width="64"
         :collapsed-icon-size="22"
@@ -25,13 +26,13 @@
       <n-gradient-text type="danger">Data refresh {{ time }} times</n-gradient-text>
     </n-layout-sider>
     <n-layout>
-      <SingleCoin :time="time" :crypto="crypto" v-if="cryptoPair.length === 1"></SingleCoin>
+      <SingleCoin :time="time" :crypto="crypto" v-if="coins.length === 1"></SingleCoin>
       <Compare
         :time="time"
         :priceBetween="priceBetween"
         :crypto="crypto"
-        :cryptoPair="cryptoPair"
-        v-if="cryptoPair.length > 1"
+        :coins="coins"
+        v-if="coins.length > 1"
       ></Compare>
       <n-card title="Click LIKE!" size="huge" style="padding: 0">
         <iframe :src="LikeButton"></iframe>
@@ -69,25 +70,25 @@ const menuOptions = [
     label: "ATOMLIKE",
     key: "ATOMLIKE",
     coins: ["ATOM", "LIKE"],
-    between: 10000,
+    priceBetween: 10000,
   },
   {
     label: "ATOMOSMO",
     key: "ATOMOSMO",
     coins: ["ATOM", "OSMO"],
-    between: 1,
+    priceBetween: 1,
 
   },
   {
     label: "OSMOLIKE",
     key: "OSMOLIKE",
     coins: ["OSMO", "LIKE"],
-    between: 10000,
+    priceBetween: 10000,
 
   },
 ];
 export default {
-  name: "Home",
+  name: "HOME",
   props: {
     msg: String,
   },
@@ -97,10 +98,10 @@ export default {
   },
   data() {
     return {
-      crypto: "ATOM",
+      crypto: this.routeParams().key,
       duration: 120000,
-      cryptoPair: ['ATOM'],
-      priceBetween: 1,
+      coins: this.routeParams().coins,
+      priceBetween: this.routeParams().priceBetween,
       time: 0,
       date: new Date(),
       LikeButton: `https://button.like.co/in/embed/editorlikersocial/button?referrer=${this.date}&type=gizmos`
@@ -116,8 +117,9 @@ export default {
     format: format,
     handleUpdateValue(key, value) {
       this.crypto = key;
-      this.cryptoPair = value.coins.slice()
-      this.priceBetween = value.between
+      this.coins = value.coins.slice()
+      this.priceBetween = value.priceBetween
+      this.$router.push(key)
     },
 
     fetchData() {
@@ -137,7 +139,6 @@ export default {
     }
   },
   mounted() {
-    document.title = 'Gizmos'
     this.timepass()
     chainDataFetch.fetchPriceData();
     chainDataFetch.fetchIBCsupply();
@@ -153,6 +154,14 @@ export default {
       message: message,
       collapsed: ref(false),
       menuOptions,
+      routeParams() {
+        if (this.$route.params.coin === "") {
+          return menuOptions[0]
+        } else {
+          let coin = menuOptions.find(item => item.key === this.$route.params.coin)
+          return coin
+        }
+      },
       renderMenuLabel(option) {
         if ("href" in option) {
           return h("a", { href: option.href, target: "_blank" }, option.label);
