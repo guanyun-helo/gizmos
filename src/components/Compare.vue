@@ -4,7 +4,7 @@
         <div class="onChainChart">
             <n-card title="On Chain Data" size="huge">
                 <div class="title"></div>
-                <div :id="priceChartID"></div>
+                <div class="chart" :id="priceChartID"></div>
             </n-card>
         </div>
     </div>
@@ -109,7 +109,6 @@ export default {
                 .style({
                     fillOpacity: 0.5,
                 });
-
             chart.line().position(`date*${this.coins[0]}`).color('#4eb673');
             chart.area().position(`date*${this.coins[0]}`).color('#4eb673');
             chart.line().position(`date*${this.coins[1]}`).color('#e1ab4b');

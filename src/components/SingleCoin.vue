@@ -3,13 +3,13 @@
         <div class="onChainChart">
             <n-card title="On Chain Data" size="huge">
                 <div class="title"></div>
-                <div :id="onChainChartID"></div>
+                <div class="chart" :id="onChainChartID"></div>
             </n-card>
         </div>
         <div class="priceChart">
             <n-card title="Price Data" size="huge">
                 <div class="title"></div>
-                <div :id="priceChartID"></div>
+                <div class="chart" :id="priceChartID"></div>
             </n-card>
         </div>
     </div>

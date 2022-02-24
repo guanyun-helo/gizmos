@@ -41,4 +41,18 @@ body {
   width: 100%;
   height: 100%;
 }
+
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 0;
+    margin: 4px !important;
+  }
+  .n-card__content {
+    padding: 0 !important;
+    margin: 4px !important;
+  }
+}
+.chart {
+  min-width: 390px;
+}
 </style>

@@ -4,24 +4,27 @@
       style="padding: 24px 0px 0px 0px"
       bordered
       collapse-mode="width"
-      :collapsed-width="64"
+      :collapsed-width="0"
       :width="200"
       :collapsed="collapsed"
       show-trigger
       @collapse="collapsed = true"
       @expand="collapsed = false"
     >
-      <n-menu
-        :default-value="this.crypto"
-        :collapsed="collapsed"
-        :collapsed-width="64"
-        :collapsed-icon-size="22"
-        :options="menuOptions"
-        :render-label="renderMenuLabel"
-        :render-icon="renderMenuIcon"
-        :expand-icon="expandIcon"
-        @update:value="handleUpdateValue"
-      />
+      <n-scrollbar style="max-height: 500px">
+        <n-menu
+          class="menu"
+          :default-value="this.crypto"
+          :collapsed="collapsed"
+          :collapsed-width="64"
+          :collapsed-icon-size="22"
+          :options="menuOptions"
+          :render-label="renderMenuLabel"
+          :render-icon="renderMenuIcon"
+          :expand-icon="expandIcon"
+          @update:value="handleUpdateValue"
+        />
+      </n-scrollbar>
       <n-gradient-text type="info">
         {{
           format(this.date, "MM-dd:kk-mm-ss")
@@ -201,7 +204,7 @@ export default {
     const message = useMessage();
     return {
       message: message,
-      collapsed: ref(false),
+      collapsed: ref(true),
       menuOptions,
       routeParams() {
         if (this.$route.params.coin === "") {
