@@ -90,15 +90,22 @@ export default {
             chart
                 .line()
                 .position('date*revelance')
-                .color('#8d8d8d')
+                .color('#3401a0')
                 .style({
                     fillOpacity: 1,
                 });
+            chart
+                .area()
+                .position('date*revelance')
+                .color('#3401a0')
+                .style({
+                    fillOpacity: 0.5,
+                });
 
-            chart.line().position(`date*${this.cryptoPair[0]}`).color('#009688');
-            chart.area().position(`date*${this.cryptoPair[0]}`).color('#009688');
-            chart.line().position(`date*${this.cryptoPair[1]}`).color('#170f34');
-            chart.area().position(`date*${this.cryptoPair[1]}`).color('#170f34');
+            chart.line().position(`date*${this.cryptoPair[0]}`).color('#4eb673');
+            chart.area().position(`date*${this.cryptoPair[0]}`).color('#4eb673');
+            chart.line().position(`date*${this.cryptoPair[1]}`).color('#e1ab4b');
+            chart.area().position(`date*${this.cryptoPair[1]}`).color('#e1ab4b');
             chart.render();
             this.priceChart = chart
         },
