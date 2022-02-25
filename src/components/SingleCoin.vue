@@ -12,6 +12,12 @@
                 <div class="chart" :id="priceChartID"></div>
             </n-card>
         </div>
+        <div class="poolChart">
+            <n-card title="Pool Data" size="huge">
+                <div class="title"></div>
+                <div class="chart" :id="poolChartID"></div>
+            </n-card>
+        </div>
     </div>
 </template>
 
@@ -24,8 +30,10 @@ export default {
         return {
             priceChartID: 'z' + util.makeid(5),
             onChainChartID: 'z' + util.makeid(5),
+            poolChartID: 'z' + util.makeid(5),
             onChainChart: null,
-            priceChart: null
+            priceChart: null,
+            poolChart: null,
         };
     },
     props: {
@@ -39,9 +47,9 @@ export default {
                     if (this.onChainChart) {
                         this.onChainChart.destroy()
                         this.priceChart.destroy()
+                        this.poolChart.destroy()
                     }
                     setTimeout(() => {
-                        this.getPrice(this.crypto);
                         this.getOnChainData(this.crypto);
                     }, 0)
                 }
@@ -52,30 +60,32 @@ export default {
                 if (this.onChainChart) {
                     this.onChainChart.destroy()
                     this.priceChart.destroy()
+                    this.poolChart.destroy()
                 }
                 setTimeout(() => {
-                    this.getPrice(newValue);
                     this.getOnChainData(newValue);
                 }, 0)
             }
         },
     },
     mounted() {
-        this.getPrice(this.crypto);
         this.getOnChainData(this.crypto);
     },
     destroy() {
         if (this.priceChart) {
             this.onChainChart.destroy()
             this.priceChart.destroy()
+            this.poolChart.destroy()
         }
     },
     methods: {
         async getOnChainData(symbol) {
             let onChainData = await chainDataFetch.getOnChainData(symbol);
             let priceData = await chainDataFetch.getPriceData(symbol);
+            let poolData = await chainDataFetch.getPoolData(symbol);
             this.renderPriceData(priceData)
             this.renderOnChinaData(onChainData);
+            this.renderPoolData(poolData)
         },
         getPrice() { },
         renderOnChinaData(data) {
@@ -142,6 +152,45 @@ export default {
             chart.render();
             this.priceChart = chart
         },
+        renderPoolData(data) {
+            // eslint-disable-next-line no-debugger
+            let chartData = data.data;
+            const chart = new Chart({
+                container: this.poolChartID,
+                autoFit: true,
+                height: 500,
+            });
+            chart.data(chartData);
+            chart.option('slider', {
+                start: 0,
+                end: 1,
+                trendCfg: {
+                    isArea: false,
+                },
+            });
+            // eslint-disable-next-line no-debugger
+            for (let i in chartData[0]) {
+                if (i !== 'date' && i !== 'series') {
+                    let color = this.getRandomColor()
+                    chart.line().position(`date*${i}`).color(color);
+                    chart.area().position(`date*${i}`).color(color);
+                }
+            }
+            chart.render();
+            this.poolChart = chart
+        },
+
+        getRandomColor() {
+            let colorList = ["#FFFF99", "#B5FF91", "#94DBFF", "#FFBAFF", "#FFBD9D", "#C7A3ED", "#CC9898", "#8AC007", "#CCC007", "#FFAD5C"];
+
+            function getColorByRandom(colorList) {
+                let colorIndex = Math.floor(Math.random() * colorList.length);
+                let color = colorList[colorIndex];
+                colorList.splice(colorIndex, 0);
+                return color;
+            }
+            return getColorByRandom(colorList)
+        }
     },
 };
 </script>

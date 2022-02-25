@@ -75,7 +75,6 @@ export default {
     },
     methods: {
         renderPriceData(data) {
-            // console.log(data1)
             data.forEach(item => {
                 item.revelance = (item[this.coins[1]] * this.priceBetween) / item[this.coins[0]]
             })

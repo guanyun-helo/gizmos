@@ -2,7 +2,7 @@ import api from "./api/api";
 import cryptos from "./crypto";
 import storage from "localforage";
 import { format } from "date-fns";
-
+import assets from './OsmoAssets'
 const chainDataFetch = {
     fetchPriceData: async () => {
         let date = new Date();
@@ -141,6 +141,9 @@ const chainDataFetch = {
         for (let i in cryptos) {
             if(cryptos[i].type !== 'cosmos') return
             let data = await api.getOsmosisLiquidity(cryptos[i].pool);
+            data.pool.poolAssets.forEach((item)=>{
+                item.symbol = assets.find((ele)=>ele.IBC === item.token.denom)
+            })
             let asset = data.pool.poolAssets.find(
                 (item) => item.token.denom === cryptos[i].IBC
             );
@@ -166,6 +169,25 @@ const chainDataFetch = {
                         value: amount,
                     });
                     storage.setItem(`${i}liquidity`, historyData);
+                }
+            });
+            let poolData = { date: format(date, "MM-dd:kk-mm")}
+            data.pool.poolAssets.forEach((item)=>{
+                poolData[item.symbol.symbol] = (Number(item.token.amount)/item.symbol.unit)
+            })
+            storage.getItem(`${cryptos[i].pool}poolliquidity`, (err, value) => {
+                if (err) {
+                    storage.setItem(`${cryptos[i].pool}poolliquidity`, [
+                        poolData,
+                    ]);
+                } else {
+                    let historyData = value ? value : [];
+
+                    if (historyData.length > 3000000) {
+                        historyData = historyData.slice(10, historyData.length);
+                    }
+                    historyData.push(poolData);
+                    storage.setItem(`${cryptos[i].pool}poolliquidity`, historyData);
                 }
             });
         }
@@ -250,6 +272,10 @@ const chainDataFetch = {
     },
     getComparePriceData: async () => {
         let data = await storage.getItem(`comparePrice`)
+        return { data }
+    },
+    getPoolData:async (symbol)=>{
+        let data = await storage.getItem(`${cryptos[symbol].pool}poolliquidity`)
         return { data }
     },
     getAirdrop: async () => {

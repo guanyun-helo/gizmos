@@ -1,0 +1,153 @@
+const assets = [
+    {
+        symbol: 'ATOM',
+        unit: 1000000,
+        IBC: 'ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2'
+    },
+    {
+        symbol: 'LUNA',
+        unit: 1000000,
+
+        IBC: 'ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0'
+    },
+    {
+        symbol: 'CRO',
+        unit: 1000000,
+
+        IBC: 'ibc/E6931F78057F7CC5DA0FD6CEF82FF39373A6E0452BF1FD76910B93292CF356C1'
+    },
+    {
+        symbol: 'UST',
+        unit: 1000000,
+
+        IBC: 'ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC'
+    },
+    {
+        symbol: 'SCRT',
+        unit: 1000000,
+
+        IBC: 'ibc/0954E1C28EB7AF5B72D24F3BC2B47BBB2FDF91BDDFD57B74B99E133AED40972A'
+    },
+    {
+        symbol: 'JUNO',
+        unit: 1000000,
+
+        IBC: 'ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED'
+    },
+    {
+        symbol: 'XPRT',
+        unit: 1000000,
+
+        IBC: 'ibc/A0CC0CF735BFB30E730C70019D4218A1244FF383503FF7579C9201AB93CA9293'
+    },
+    {
+        symbol: 'KRT',
+        unit: 1000000,
+
+        IBC: 'ibc/204A582244FC241613DBB50B04D1D454116C58C4AF7866C186AA0D6EEAD42780'
+    },
+    {
+        symbol: 'AKT',
+        unit: 1000000,
+
+        IBC: 'ibc/1480B8FD20AD5FCAE81EA87584D269547DD4D436843C1D20F15E00EB64743EF4'
+    },
+    {
+        symbol: 'REGEN',
+        unit: 1000000,
+
+        IBC: 'ibc/1DCC8A6CB5689018431323953344A9F6CC4D0BFB261E88C9F7777372C10CD076'
+    },
+    {
+        symbol: 'DVPN',
+        unit: 1000000,
+
+        IBC: 'ibc/9712DBB13B9631EDFA9BF61B55F1B2D290B2ADB67E3A4EB3A875F3B6081B3B84'
+    },
+    {
+        symbol: 'IRIS',
+        unit: 1000000,
+
+        IBC: 'ibc/7C4D60AA95E5A7558B0A364860979CA34B7FF8AAF255B87AF9E879374470CEC0'
+    },
+    {
+        symbol: 'IOV',
+        unit: 1000000,
+
+        IBC: 'ibc/52B1AA623B34EB78FD767CEA69E8D7FA6C9CFE1FBF49C5406268FD325E2CC2AC'
+    },
+    {
+        symbol: 'NGM',
+        unit: 1000000,
+
+        IBC: 'ibc/1DC495FCEFDA068A3820F903EDBD78B942FBD204D7E93D3BA2B432E9669D1A59'
+    },
+    {
+        symbol: 'EEUR',
+        unit: 1000000,
+
+        IBC: 'ibc/5973C068568365FFF40DEDCF1A1CB7582B6116B731CD31A12231AE25E20B871F'
+    },
+    {
+        symbol: 'TICK',
+        unit: 1000000,
+
+        IBC: 'ibc/655BCEF3CDEBE32863FF281DBBE3B06160339E9897DC9C9C9821932A5F8BA6F8'
+    },
+    {
+        symbol: 'LIKE',
+        unit: 1000000000,
+
+        IBC: 'ibc/9989AD6CCA39D1131523DB0617B50F6442081162294B4795E26746292467B525'
+    },
+    {
+        symbol: 'IXO',
+        unit: 1000000,
+
+        IBC: 'ibc/F3FF7A84A73B62921538642F9797C423D2B4C4ACB3C7FCFFCE7F12AA69909C4B'
+    },
+    {
+        symbol: 'BCNA',
+        unit: 1000000,
+
+        IBC: 'ibc/D805F1DA50D31B96E4282C1D4181EDDFB1A44A598BFF5666F4B43E4B8BEA95A5'
+    },
+    {
+        symbol: 'BTSG',
+        unit: 1000000,
+
+        IBC: 'ibc/4E5444C35610CC76FC94E7F7886B93121175C28262DDFDDE6F84E82BF2425452'
+    },
+    {
+        symbol: 'XKI',
+        unit: 1000000,
+
+        IBC: 'ibc/B547DC9B897E7C3AA5B824696110B8E3D2C31E3ED3F02FF363DCBAD82457E07E'
+    },
+    {
+        symbol: 'CMDX',
+        unit: 1000000,
+
+        IBC: 'ibc/FE2CD1E6828EC0FAB8AF39BAC45BC25B965BA67CCBC50C13A14BD610B0D1E2C4'
+    },
+    {
+        symbol: 'Stargaze',
+        unit: 1000000,
+
+        IBC: 'ibc/987C17B11ABC2B20019178ACE62929FE9840202CE79498E29FE8E5CB02B7C0A4'
+    },
+    {
+        symbol: 'Chihuahua',
+        unit: 1000000,
+
+        IBC: 'ibc/B9E0A1A524E98BB407D3CED8720EFEFD186002F90C1B1B7964811DD0CCC12228'
+    },
+    {
+        symbol: 'OSMO',
+        unit: 1000000,
+
+        IBC: 'uosmo'
+    },
+]
+
+export default assets;
