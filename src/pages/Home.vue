@@ -53,7 +53,7 @@
     <n-layout>
       <n-alert style="margin: 20px 20px 0px 20px;" title="Important notice" type="info">
         You need to keep this site open in order to collect data for you, if you want other coin's data track, please go to github and request.
-        你要保持网站处于开启状态才能为你搜集链上数据，点击进入 github 增加你想追踪的空投，注意配置 RPC/IBC/和airdropWallet，然后提交 pr 就能追踪你的空投了
+        你要保持网站处于开启状态才能为你搜集链上数据，若是看不到数据，请多刷新剂此，点击进入 github 增加你想追踪的空投，注意配置 RPC/IBC/和airdropWallet，然后提交 pr 就能追踪你的空投了
       </n-alert>
       <SingleCoin :time="time" :crypto="crypto" v-if="coins.length === 1"></SingleCoin>
       <Compare
