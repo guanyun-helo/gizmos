@@ -4,7 +4,7 @@
       style="padding: 24px 0px 0px 0px"
       bordered
       collapse-mode="width"
-      :collapsed-width="0"
+      :collapsed-width="10"
       :width="200"
       :collapsed="collapsed"
       show-trigger
@@ -42,15 +42,19 @@
           </a>
         </n-icon>
       </n-avatar>
-      <n-log
+      <!-- <n-log
         font-size="11"
         style="position: absolute; bottom: 80px; left: 4%;font-size: 10px;"
         :rows="8"
         :log="`点击进入 github 增加你想追踪的空投，注意配置 RPC/IBC/和airdropWallet，然后提交 pr 就能追踪你的空投了`"
-      />
+      />-->
     </n-layout-sider>
 
     <n-layout>
+      <n-alert style="margin: 20px 20px 0px 20px;" title="Important notice" type="info">
+        You need to keep this site open in order to collect data for you, if you want other coin's data track, please go to github and request.
+        点击进入 github 增加你想追踪的空投，注意配置 RPC/IBC/和airdropWallet，然后提交 pr 就能追踪你的空投了
+      </n-alert>
       <SingleCoin :time="time" :crypto="crypto" v-if="coins.length === 1"></SingleCoin>
       <Compare
         :time="time"
