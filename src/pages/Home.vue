@@ -73,7 +73,7 @@
 <script>
 import { h, ref } from "vue";
 import { NIcon, useMessage } from "naive-ui";
-import { BookmarkOutline, CaretDownOutline } from "@vicons/ionicons5";
+import { Planet, PlanetOutline } from "@vicons/ionicons5";
 import SingleCoin from "../components/SingleCoin.vue";
 import Compare from "../components/Compare.vue";
 import chainDataFetch from "../assets/data";
@@ -92,6 +92,11 @@ const menuOptions = [
     coins: ["UST"],
   },
   {
+    label: "CRO",
+    key: "CRO",
+    coins: ["CRO"],
+  },
+  {
     label: "LUNA",
     key: "LUNA",
     coins: ["LUNA"],
@@ -102,15 +107,19 @@ const menuOptions = [
     coins: ["OSMO"],
   },
   {
+    label: "JUNO",
+    key: "JUNO",
+    coins: ["JUNO"],
+  },
+  {
+    label: "HUAHUA",
+    key: "HUAHUA",
+    coins: ["HUAHUA"],
+  },
+  {
     label: "LIKE",
     key: "LIKE",
     coins: ["LIKE"],
-  },
-  {
-    label: "ATOMLUNA",
-    key: "ATOMLUNA",
-    coins: ["ATOM", "LUNA"],
-    priceBetween: 1,
   },
   {
     label: "ATOMbitcoin",
@@ -125,16 +134,40 @@ const menuOptions = [
     priceBetween: 1,
   },
   {
-    label: "ATOMLIKE",
-    key: "ATOMLIKE",
-    coins: ["ATOM", "LIKE"],
-    priceBetween: 10000,
+    label: "ATOMLUNA",
+    key: "ATOMLUNA",
+    coins: ["ATOM", "LUNA"],
+    priceBetween: 1,
+  },
+  {
+    label: "ATOMCRO",
+    key: "ATOMCRO",
+    coins: ["ATOM", "CRO"],
+    priceBetween: 1,
+  },
+  {
+    label: "ATOMJUNO",
+    key: "ATOMJUNO",
+    coins: ["ATOM", "JUNO"],
+    priceBetween: 1,
   },
   {
     label: "ATOMOSMO",
     key: "ATOMOSMO",
     coins: ["ATOM", "OSMO"],
     priceBetween: 1,
+  },
+  {
+    label: "ATOMHUAHUA",
+    key: "ATOMHUAHUA",
+    coins: ["ATOM", "HUAHUA"],
+    priceBetween: 1,
+  },
+  {
+    label: "ATOMLIKE",
+    key: "ATOMLIKE",
+    coins: ["ATOM", "LIKE"],
+    priceBetween: 10000,
   },
   {
     label: "OSMOLIKE",
@@ -229,10 +262,10 @@ export default {
       renderMenuIcon(option) {
         if (option.key === "sheep-man") return true;
         if (option.key === "food") return null;
-        return h(NIcon, null, { default: () => h(BookmarkOutline) });
+        return h(NIcon, null, { default: () => h(Planet) });
       },
       expandIcon() {
-        return h(NIcon, null, { default: () => h(CaretDownOutline) });
+        return h(NIcon, null, { default: () => h(PlanetOutline) });
       },
     };
   },
