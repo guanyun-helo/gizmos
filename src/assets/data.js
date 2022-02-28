@@ -275,6 +275,7 @@ const chainDataFetch = {
         return { data }
     },
     getPoolData:async (symbol)=>{
+        if(cryptos[symbol].type !== 'cosmos') return
         let data = await storage.getItem(`${cryptos[symbol].pool}poolliquidity`)
         return { data }
     },
