@@ -32,10 +32,13 @@ export default {
         time: {
             handler(newValue, oldValue) {
                 if (newValue !== oldValue) {
+                    if (this.priceChart) {
+                        this.priceChart.destroy()
+                    }
                     setTimeout(() => {
                         (async () => {
                             let compareData = await chainDataFetch.getComparePriceData()
-                            this.updateChart(compareData.data)
+                            this.renderPriceData(compareData.data)
                         })()
                     }, 0)
                 }

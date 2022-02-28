@@ -44,8 +44,13 @@ export default {
         time: {
             handler(newValue, oldValue) {
                 if (newValue !== oldValue) {
+                    if (this.onChainChart) {
+                        this.onChainChart.destroy()
+                        this.priceChart.destroy()
+                        this.poolChart.destroy()
+                    }
                     setTimeout(() => {
-                        this.updateCoinData(this.crypto)
+                        this.getCoinData(newValue);
                     }, 0)
                 }
             },

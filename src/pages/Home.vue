@@ -190,7 +190,7 @@ export default {
     return {
       crypto: this.routeParams().key,
       duration: 120000,
-      priceDuration: 30000,
+      priceDuration: 50000,
       coins: this.routeParams().coins,
       priceBetween: this.routeParams().priceBetween,
       time: 0,
