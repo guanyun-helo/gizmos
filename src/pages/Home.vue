@@ -190,6 +190,7 @@ export default {
     return {
       crypto: this.routeParams().key,
       duration: 120000,
+      priceDuration: 10000,
       coins: this.routeParams().coins,
       priceBetween: this.routeParams().priceBetween,
       time: 0,
@@ -214,7 +215,6 @@ export default {
 
     fetchData() {
       setTimeout(() => {
-        chainDataFetch.fetchPriceData();
         chainDataFetch.fetchIBCsupply();
         chainDataFetch.fetchSupply();
         chainDataFetch.fetchLiquidity();
@@ -226,6 +226,12 @@ export default {
         this.message.info("Data has been feched!!");
       }, this.duration);
     },
+    fetchPriceData() {
+      setTimeout(() => {
+        chainDataFetch.fetchPriceData();
+        this.fetchPriceData()
+      }, this.priceDuration())
+    }
   },
   mounted() {
     this.timepass();
@@ -236,6 +242,7 @@ export default {
     chainDataFetch.fetchStakeToken();
     chainDataFetch.getAirdrop();
     this.fetchData();
+    this.fetchPriceData()
   },
   setup() {
     const message = useMessage();
