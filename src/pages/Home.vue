@@ -230,7 +230,7 @@ export default {
       setTimeout(() => {
         chainDataFetch.fetchPriceData();
         this.fetchPriceData()
-      }, this.priceDuration())
+      }, this.priceDuration)
     }
   },
   mounted() {
