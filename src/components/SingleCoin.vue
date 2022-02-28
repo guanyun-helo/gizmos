@@ -50,7 +50,7 @@ export default {
                         this.poolChart.destroy()
                     }
                     setTimeout(() => {
-                        this.getCoinData(newValue);
+                        this.getCoinData(this.crypto);
                     }, 0)
                 }
             },
