@@ -32,13 +32,10 @@ export default {
         time: {
             handler(newValue, oldValue) {
                 if (newValue !== oldValue) {
-                    if (this.priceChart) {
-                        this.priceChart.destroy()
-                    }
                     setTimeout(() => {
                         (async () => {
                             let compareData = await chainDataFetch.getComparePriceData()
-                            this.renderPriceData(compareData.data)
+                            this.updateChart(compareData.data)
                         })()
                     }, 0)
                 }
@@ -74,6 +71,14 @@ export default {
         }
     },
     methods: {
+        updateChart(data) {
+            data.forEach(item => {
+                item.revelance = (item[this.coins[1]] * this.priceBetween) / item[this.coins[0]]
+            })
+            if (this.priceChart) {
+                this.priceChart.data(data)
+            }
+        },
         renderPriceData(data) {
             data.forEach(item => {
                 item.revelance = (item[this.coins[1]] * this.priceBetween) / item[this.coins[0]]

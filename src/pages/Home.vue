@@ -224,7 +224,7 @@ export default {
         this.time++;
         this.LikeButton = `https://button.like.co/in/embed/editorlikersocial/button?referrer=${this.date}&type=gizmos`;
         this.fetchData();
-        this.message.info("Data has been feched!!");
+        this.message.info("On-Chain Data has been feched!!");
       }, this.duration);
     },
     fetchPriceData() {

@@ -44,13 +44,8 @@ export default {
         time: {
             handler(newValue, oldValue) {
                 if (newValue !== oldValue) {
-                    if (this.onChainChart) {
-                        this.onChainChart.destroy()
-                        this.priceChart.destroy()
-                        this.poolChart.destroy()
-                    }
                     setTimeout(() => {
-                        this.getOnChainData(this.crypto);
+                        this.updateCoinData(this.crypto)
                     }, 0)
                 }
             },
@@ -63,13 +58,13 @@ export default {
                     this.poolChart.destroy()
                 }
                 setTimeout(() => {
-                    this.getOnChainData(newValue);
+                    this.getCoinData(newValue);
                 }, 0)
             }
         },
     },
     mounted() {
-        this.getOnChainData(this.crypto);
+        this.getCoinData(this.crypto);
     },
     destroy() {
         if (this.priceChart) {
@@ -79,7 +74,7 @@ export default {
         }
     },
     methods: {
-        async getOnChainData(symbol) {
+        async getCoinData(symbol) {
             let onChainData = await chainDataFetch.getOnChainData(symbol);
             let priceData = await chainDataFetch.getPriceData(symbol);
             let poolData = await chainDataFetch.getPoolData(symbol);
@@ -87,7 +82,6 @@ export default {
             this.renderOnChinaData(onChainData);
             this.renderPoolData(poolData)
         },
-        getPrice() { },
         renderOnChinaData(data) {
             let chartData = [];
 
@@ -179,7 +173,43 @@ export default {
             chart.render();
             this.poolChart = chart
         },
+        async updateCoinData(symbol) {
+            let onChainData = await chainDataFetch.getOnChainData(symbol);
+            let priceData = await chainDataFetch.getPriceData(symbol);
+            let poolData = await chainDataFetch.getPoolData(symbol);
+            this.updatePriceData(priceData)
+            this.updateOnChainData(onChainData);
+            this.updatePoolData(poolData)
+        },
+        updatePriceData(data) {
+            if (!this.priceChart) return
+            let chartData = [];
 
+            for (let i in data) {
+                data[i].forEach((ele) => {
+                    ele.series = i
+                    chartData.push(ele);
+                });
+            }
+            this.priceChart.data(chartData);
+
+
+        },
+        updatePoolData(data) {
+            if (!this.poolChart) return
+            this.poolChart.data(data.data)
+        },
+        updateOnChainData(data) {
+            let chartData = [];
+
+            for (let i in data) {
+                data[i].forEach((ele) => {
+                    ele.series = i
+                    chartData.push(ele);
+                });
+            }
+            this.onChainChart.data(chartData)
+        },
         getRandomColor() {
             let colorList = ["#FFFF99", "#B5FF91", "#94DBFF", "#FFBAFF", "#FFBD9D", "#C7A3ED", "#CC9898", "#8AC007", "#CCC007", "#FFAD5C"];
 
