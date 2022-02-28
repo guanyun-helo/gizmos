@@ -57,7 +57,7 @@
       </n-alert>
       <SingleCoin :time="time" :crypto="crypto" v-if="coins.length === 1"></SingleCoin>
       <Compare
-        :time="time"
+        :time="priceTime"
         :priceBetween="priceBetween"
         :crypto="crypto"
         :coins="coins"
@@ -194,6 +194,7 @@ export default {
       coins: this.routeParams().coins,
       priceBetween: this.routeParams().priceBetween,
       time: 0,
+      priceTime: 0,
       date: new Date(),
       LikeButton: `https://button.like.co/in/embed/editorlikersocial/button?referrer=${this.date}&type=gizmos`,
     };
@@ -230,6 +231,7 @@ export default {
       setTimeout(() => {
         chainDataFetch.fetchPriceData();
         this.fetchPriceData()
+        this.priceTime++;
       }, this.priceDuration)
     }
   },
