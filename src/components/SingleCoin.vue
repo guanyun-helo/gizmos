@@ -191,13 +191,13 @@ export default {
                     chartData.push(ele);
                 });
             }
-            this.priceChart.data(chartData);
+            this.priceChart.changeData(chartData);
 
 
         },
         updatePoolData(data) {
             if (!this.poolChart) return
-            this.poolChart.data(data.data)
+            this.poolChart.changeData(data.data)
         },
         updateOnChainData(data) {
             let chartData = [];
@@ -208,7 +208,7 @@ export default {
                     chartData.push(ele);
                 });
             }
-            this.onChainChart.data(chartData)
+            this.onChainChart.changeData(chartData)
         },
         getRandomColor() {
             let colorList = ["#FFFF99", "#B5FF91", "#94DBFF", "#FFBAFF", "#FFBD9D", "#C7A3ED", "#CC9898", "#8AC007", "#CCC007", "#FFAD5C"];

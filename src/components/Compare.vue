@@ -76,7 +76,7 @@ export default {
                 item.revelance = (item[this.coins[1]] * this.priceBetween) / item[this.coins[0]]
             })
             if (this.priceChart) {
-                this.priceChart.data(data)
+                this.priceChart.changeData(data)
             }
         },
         renderPriceData(data) {
