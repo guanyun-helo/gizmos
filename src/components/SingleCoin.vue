@@ -121,6 +121,7 @@ export default {
             });
             chart.line().position('date*value').color('series');
             chart.area().position('date*value').color('series');
+            chart.animate(false)
             chart.render();
             this.onChainChart = chart
         },
@@ -148,6 +149,7 @@ export default {
             });
             chart.line().position('date*value').color('series');
             chart.area().position('date*value').color('series');
+            chart.animate(false)
             chart.render();
             this.priceChart = chart
         },
@@ -175,6 +177,7 @@ export default {
                     chart.area().position(`date*${i}`).color(color);
                 }
             }
+            chart.animate(false)
             chart.render();
             this.poolChart = chart
         },

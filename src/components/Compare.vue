@@ -120,6 +120,7 @@ export default {
             chart.area().position(`date*${this.coins[0]}`).color('#4eb673');
             chart.line().position(`date*${this.coins[1]}`).color('#e1ab4b');
             chart.area().position(`date*${this.coins[1]}`).color('#e1ab4b');
+            chart.animate(false)
             chart.render();
             this.priceChart = chart
         },
