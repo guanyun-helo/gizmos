@@ -122,6 +122,11 @@ const menuOptions = [
     coins: ["LIKE"],
   },
   {
+    label: "GRAV",
+    key: "GRAV",
+    coins: ["GRAV"],
+  },
+  {
     label: "ATOMbitcoin",
     key: "ATOMbitcoin",
     coins: ["ATOM", "bitcoin"],
@@ -167,6 +172,12 @@ const menuOptions = [
     label: "ATOMLIKE",
     key: "ATOMLIKE",
     coins: ["ATOM", "LIKE"],
+    priceBetween: 10000,
+  },
+  {
+    label: "ATOMGRAV",
+    key: "ATOMGRAV",
+    coins: ["ATOM", "GRAV"],
     priceBetween: 10000,
   },
   {

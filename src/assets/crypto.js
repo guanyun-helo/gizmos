@@ -98,6 +98,17 @@ const cryptos = {
     airdrop: false,
     airdropWallet: [],
   },
+  GRAV: {
+    type: "cosmos",
+    symbol: "GRAV",
+    rpc: "https://gravitychain.io:1317",
+    pool: 625,
+    IBC: "ibc/E97634A40119F1898989C2A23224ED83FDD0A57EA46B3A094E287288D1672B44",
+    unit: 1000000,
+    denom: "ugraviton",
+    airdrop: false,
+    airdropWallet: [],
+  },
   bitcoin: {
     type: "bitcoin",
     symbol: "bitcoin",
