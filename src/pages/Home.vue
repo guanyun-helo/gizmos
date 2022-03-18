@@ -181,6 +181,12 @@ const menuOptions = [
     priceBetween: 10000,
   },
   {
+    label: "LIKESTARS",
+    key: "LIKESTARS",
+    coins: ["LIKE", "STARS"],
+    priceBetween: 10000,
+  },
+  {
     label: "OSMOLIKE",
     key: "OSMOLIKE",
     coins: ["OSMO", "LIKE"],
