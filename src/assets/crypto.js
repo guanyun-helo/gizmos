@@ -112,7 +112,7 @@ const cryptos = {
   DVPN: {
     type: "cosmos",
     symbol: "DVPN",
-    rpc: "https://lcd.sentinel.co (0.42.6)",
+    rpc: "https://lcd.sentinel.co",
     pool: 3,
     IBC: "ibc/9712DBB13B9631EDFA9BF61B55F1B2D290B2ADB67E3A4EB3A875F3B6081B3B84",
     unit: 1000000,
