@@ -122,9 +122,14 @@ const menuOptions = [
     coins: ["LIKE"],
   },
   {
-    label: "STARS",
-    key: "STARS",
-    coins: ["STARS"],
+    label: "AKT",
+    key: "AKT",
+    coins: ["AKT"],
+  },
+  {
+    label: "DVPN",
+    key: "DVPN",
+    coins: ["DVPN"],
   },
   {
     label: "ATOMbitcoin",
@@ -175,15 +180,21 @@ const menuOptions = [
     priceBetween: 10000,
   },
   {
-    label: "ATOMSTARS",
-    key: "ATOMSTARS",
-    coins: ["ATOM", "STARS"],
+    label: "ATOMAKT",
+    key: "ATOMAKT",
+    coins: ["ATOM", "AKT"],
     priceBetween: 10000,
   },
   {
-    label: "LIKESTARS",
-    key: "LIKESTARS",
-    coins: ["LIKE", "STARS"],
+    label: "ATOMDVPN",
+    key: "ATOMDVPN",
+    coins: ["ATOM", "DVPN"],
+    priceBetween: 10000,
+  },
+  {
+    label: "LIKEAKT",
+    key: "LIKEAKT",
+    coins: ["LIKE", "AKT"],
     priceBetween: 10000,
   },
   {
