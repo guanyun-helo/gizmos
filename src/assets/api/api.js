@@ -9,7 +9,7 @@ const api = {
         );
     },
     getPrice: (Symbol,type) => {
-        let baseUrl = type === 'cosmos' ? `https://api-osmosis.imperator.co/tokens/v1/${Symbol}` :`https://api.coingecko.com/api/v3/simple/price?ids=${Symbol}&vs_currencies=usd`
+        let baseUrl = type === 'cosmos' ? `https://api-osmosis.imperator.co/tokens/v2/${Symbol}` :`https://api.coingecko.com/api/v3/simple/price?ids=${Symbol}&vs_currencies=usd`
         return fetch(baseUrl).then(
             (res) => {
                 return res.json()
